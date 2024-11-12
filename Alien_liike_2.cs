@@ -10,7 +10,8 @@ using System.Xml.Schema;
 using UnityEngine.UIElements;
 //using System;
 //using Debug = System.Diagnostics.Debug;
-//
+//testi
+
 
 
 public class Alien_liike_2 : MonoBehaviour
