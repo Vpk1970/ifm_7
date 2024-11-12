@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a6303f6931a1b9f4bb7240a874cd6a9c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - Alien_5: {fileID: 7965591616414005073, guid: 5d3ffb1431b3da84085bc1f88621784a, type: 3}
+  - Ammus_5: {fileID: 14098958895357143, guid: 2938ea94b43316e44becfe4d9c8864fa, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

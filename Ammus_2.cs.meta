@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 37e361a51110d7e4f999e6f53bd67364
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pelaajanAmmus: {fileID: 14098958895357143, guid: 2938ea94b43316e44becfe4d9c8864fa, type: 3}
+  - pelaajanAlus: {fileID: 8322176972858562985, guid: 107ca80e9c5da7b47a7f3743b5b40d31, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

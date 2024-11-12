@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: d2646308a6ebeee40b95ce819268f821
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - alus: {fileID: 8322176972858562985, guid: 107ca80e9c5da7b47a7f3743b5b40d31, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
