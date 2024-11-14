@@ -19,11 +19,21 @@ public class Alien_ammus_liike : MonoBehaviour
     {
         this.GetComponent<Transform>().Translate(0f, nopeus * Time.deltaTime, 0f);
 
+
+
         if (this.GetComponent<Transform>().position.y < alaraja)
         {
             Destroy(this.gameObject);
 
         }
     }
-    
+    /*private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name.Equals("ship(Clone)"))
+        {
+            Debug.Log("alien osui alukseen");
+
+
+        }
+    }*/
 }

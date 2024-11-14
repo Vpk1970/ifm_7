@@ -26,6 +26,7 @@ public class Ammus_liike_2 : MonoBehaviour
         if (this.GetComponent<Transform>().position.y > yläraja)
         {
             Destroy(this.gameObject);
+
         }
     }
 
@@ -35,7 +36,8 @@ public class Ammus_liike_2 : MonoBehaviour
         {
 
             GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 10;
-                        
+            //GameObject.Find("Koodia").GetComponent<score_lives>().pisteet += 10;
+            
             Destroy(this.gameObject);
 
         }

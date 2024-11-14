@@ -4,31 +4,62 @@ using UnityEngine;
 
 public class AlienLuontiTehdas_2 : MonoBehaviour
 {
-    public GameObject alien = null;
+    public GameObject alien;
     public float offset = 1.5f; // alienien väli joka suunnassa
-        
+
+    //private float aikaajaljella = 10;
+
     // Start is called before the first frame update
     void Start()
     {
+        /*for (float y = 1f; y <= 4f; y = y + 1f)
+        {
+            for (float x = 1f; x <= 8f; x = x + 1f)
+            {
+                GameObject apualien = Instantiate(Alien_5, new Vector3(x - 8 * offset + 2, 5 - y * offset, 0f), Quaternion.identity);
+            }   
+        }*/
+
         Invoke(nameof(AlienLuonti_2), 3.0f);
-     
+        //AlienLuonti_2();
+
+        
+
+}
+
+    // Update is called once per frame
+    void Update()
+    {
     }
-            
     public GameObject AlienLuonti_2()
     {
-        
-        for (float y = 0f; y <= 3f; y = y + 1f)
+        /*for (int i = 0;i < 1000000000; i++)
         {
-            for (float x = 0f; x <= 7f; x = x + 1f)
+
+        }*/
+        //Debug.Log("ajastin loppu");
+
+        //if (aikaajaljella < 0)
+        //{
+            for (float y = 0f; y <= 3f; y = y + 1f)
             {
+                for (float x = 0f; x <= 7f; x = x + 1f)
+                {
                 GameObject gameObject1 = Instantiate(alien, new Vector3(-8 + (offset * x), 4 - (offset * y), 0f), Quaternion.identity);
                 gameObject1.name = "Alien";
-            }
 
-        }
+                }
+            }
+            //aikaajaljella = 10;
+
+        //}
+        // aikaajaljella -= Time.deltaTime;
+
 
         return gameObject;
-         
+
+        //Alien_5.name = "alien";
+
     }
 }
 /* Pseudoa:

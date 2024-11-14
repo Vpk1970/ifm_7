@@ -7,8 +7,8 @@ using UnityEngine;
 
 public class Ammus_2 : MonoBehaviour
 {
-    public GameObject pelaajanAmmus = null;
-    public GameObject pelaajanAlus = null;
+    public GameObject pelaajanAmmus;
+    public GameObject pelaajanAlus;
     
     // Update is called once per frame
     void Update()
@@ -17,7 +17,8 @@ public class Ammus_2 : MonoBehaviour
         {
             GameObject apuammus = Instantiate(this.pelaajanAmmus, new Vector3(this.pelaajanAlus.GetComponent<Transform>().position.x,
                 this.pelaajanAlus.GetComponent<Transform>().position.y + 0.9f, 0f), Quaternion.identity);
-            
+            //Debug.Log("Ammus luonti");
+
         }
     }
 }

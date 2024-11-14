@@ -8,10 +8,11 @@ using Unity.VisualScripting;
 //using System;
 using System.Xml.Schema;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 //using System;
 //using Debug = System.Diagnostics.Debug;
-//testi
-
+//
+//
 
 
 public class Alien_liike_2 : MonoBehaviour
@@ -37,14 +38,14 @@ public class Alien_liike_2 : MonoBehaviour
     //public GameObject alienAmmus;
     //private GameObject apuluonti;
 
-    public AlienLuontiTehdas_2 alienlt = null;
+    public AlienLuontiTehdas_2 alienlt;
 
     static int alienDeaths = 0;
 
     private float xMin; // Alaraja jonka yläpuolella suunnanVaihto on true
     private float xMax; // Yläraja jonka alapuolella suunnanVaihto on true
 
-    public Transform _transform = null;
+    public Transform _transform;
 
     private void Awake()
     {
@@ -117,13 +118,7 @@ public class Alien_liike_2 : MonoBehaviour
             //Debug.Log(suunnanVaihto);
         }
 
-        
-
-        vaihdetaankoSuunta();
-
-        // Tee tämä metodiksi...Tehty!
-
-        /*if (((this._transform.position.x >= loppu_x) && (suunnanVaihto)) || ((this._transform.position.x <= alku_x) && (suunnanVaihto))) // ???
+        if (((this._transform.position.x >= loppu_x) && (suunnanVaihto)) || ((this._transform.position.x <= alku_x) && (suunnanVaihto))) // ???
         {
             suunta *= -1;
             suunnanVaihto = false;          
@@ -134,12 +129,15 @@ public class Alien_liike_2 : MonoBehaviour
             {
                 //Application.Quit();
                 Destroy(this.gameObject);
+                PlayerPrefs.SetFloat("score", GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
+
+                //Debug.Log(GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
+
+                SceneManager.LoadScene(2);
 
             }
 
-        }*/
-
-        // Metodin loppu
+        }
 
         /*if ((this.transform.position.x <= alku_x) && (alienienLuonti == true))
         {
@@ -176,11 +174,14 @@ public class Alien_liike_2 : MonoBehaviour
         }*/
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.name.Equals("Ammus_5(Clone)"))
             {
+                //Destroy(this.Ammus_5);
+
                 Destroy(this.gameObject);
+                //Debug.Log("collision");
                 alienDeaths += 1;
                 if (alienDeaths == 32)
                 {
@@ -193,23 +194,5 @@ public class Alien_liike_2 : MonoBehaviour
             }
         }
 
-    public void vaihdetaankoSuunta()
-        {
-            if (((this._transform.position.x >= loppu_x) && (suunnanVaihto)) || ((this._transform.position.x <= alku_x) && (suunnanVaihto))) // ???
-                {
-                    suunta *= -1;
-                    suunnanVaihto = false;
-
-                    Debug.Log(this._transform.position.x);
-
-            if (this.GetComponent<Transform>().position.y <= y_alienAlareuna)
-                {
-                    //Application.Quit();
-                    Destroy(this.gameObject);
-
-                }
-
-        }
     }
-}
 
