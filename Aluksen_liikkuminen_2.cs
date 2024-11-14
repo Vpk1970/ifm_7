@@ -4,6 +4,8 @@ using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Aluksenliikkuminen : MonoBehaviour
 {
@@ -43,6 +45,11 @@ public class Aluksenliikkuminen : MonoBehaviour
                 this.GetComponent<Transform>().Translate(-liikkumis_nopeus * Time.deltaTime, 0f, 0f);
             }
         }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
 
         lives_teksti.GetComponent<Text>().text = "ELÄMÄT: " + elamat.ToString("0");
     }
@@ -53,14 +60,27 @@ public class Aluksenliikkuminen : MonoBehaviour
         {
             this.pelaajanAlus.SetActive(false);//Destroy(this.gameObject);
             this.elamat -= 1;
+            //Debug.Log(elamat);
             this.lives_teksti.GetComponent<Text>().text = "ELÄMÄT: " + elamat;
 
             // Tähän väliin ajastimella tauko
             Invoke("luo_alus", 2.0f);
 
+            
+
             if (this.elamat <= 0)
             {
+                
                 Destroy(this.gameObject);
+
+                PlayerPrefs.SetFloat("score", GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
+
+                //Debug.Log(GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
+
+                SceneManager.LoadScene(2);
+
+
+                
             }
         }
     }
