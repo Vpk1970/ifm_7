@@ -16,6 +16,9 @@ public class Aluksenliikkuminen : MonoBehaviour
     public int elamat = 3;
     public GameObject pelaajanAlus = null;
     private GameObject lives_teksti = null;
+
+    public GameObject paukku_2 = null;
+
     
     // Start is called before the first frame update
     void Start()
@@ -62,6 +65,9 @@ public class Aluksenliikkuminen : MonoBehaviour
             this.elamat -= 1;
             //Debug.Log(elamat);
             this.lives_teksti.GetComponent<Text>().text = "ELÄMÄT: " + elamat;
+
+            GameObject apupaukku_2 = Instantiate(this.paukku_2, this.GetComponent<Transform>().position, Quaternion.identity);
+            Destroy(apupaukku_2.gameObject, 1f);
 
             // Tähän väliin ajastimella tauko
             Invoke("luo_alus", 2.0f);
