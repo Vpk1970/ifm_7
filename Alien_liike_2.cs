@@ -38,18 +38,20 @@ public class Alien_liike_2 : MonoBehaviour
     //public GameObject alienAmmus;
     //private GameObject apuluonti;
 
-    public AlienLuontiTehdas_2 alienlt;
+    private AlienLuontiTehdas_2 alienlt;
 
     static int alienDeaths = 0;
 
     private float xMin; // Alaraja jonka yläpuolella suunnanVaihto on true
     private float xMax; // Yläraja jonka alapuolella suunnanVaihto on true
 
-    public Transform _transform;
+    private Transform _transform;
 
     static float addAlienSpeed = 1f;
 
     public GameObject paukku = null;
+
+    public GameObject explosion = null;
 
 
 
@@ -83,6 +85,9 @@ public class Alien_liike_2 : MonoBehaviour
 
         //addAlienSpeed = 1f;
 
+        explosion = GameObject.Find("Explosion");
+
+
 
     }
 
@@ -96,8 +101,8 @@ public class Alien_liike_2 : MonoBehaviour
         // Jos alku_x on sama kuin loppu_x tulee ilmoitus konsoliin
         //UnityEngine.Debug.Assert(suunnanVaihto == true);
         
-        this._transform.position += nopeus * addAlienSpeed * Time.deltaTime * new Vector3(1f * suunta, 0f, 0f);// localPosition ???        
-        Debug.Log(addAlienSpeed);
+        //Debug.Log(addAlienSpeed);
+        //Debug.Log(this.transform.position.x);
 
         if (this._transform.position.x <= alku_x)
         {
@@ -114,6 +119,7 @@ public class Alien_liike_2 : MonoBehaviour
 
         }
   
+        // Tässä tarkistetaan onko alien lohkojen A ja C ulkopuolella jolloin suunnanVaihto on true.
 
         if ((this._transform.position.x >= alku_x + xMin) || (this._transform.position.x <= loppu_x - xMax))
         {
@@ -129,12 +135,14 @@ public class Alien_liike_2 : MonoBehaviour
             //Debug.Log(suunnanVaihto);
         }
 
+        // Onko alien reunoissa jollain käännetään suunta.
+
         if (((this._transform.position.x >= loppu_x) && (suunnanVaihto)) || ((this._transform.position.x <= alku_x) && (suunnanVaihto))) // ???
         {
             suunta *= -1;
             suunnanVaihto = false;          
             
-            //Debug.Log(this._transform.position.x);
+            Debug.Log(this._transform.position.x);
                         
             if (this.GetComponent<Transform>().position.y <= y_alienAlareuna)
             {
@@ -149,6 +157,9 @@ public class Alien_liike_2 : MonoBehaviour
             }
 
         }
+
+        this._transform.position += nopeus * addAlienSpeed * Time.deltaTime * new Vector3(1f * suunta, 0f, 0f);// localPosition ???        
+
 
         /*if ((this.transform.position.x <= alku_x) && (alienienLuonti == true))
         {
@@ -185,7 +196,7 @@ public class Alien_liike_2 : MonoBehaviour
         }*/
     }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.name.Equals("Ammus_5(Clone)"))
             {
@@ -194,14 +205,18 @@ public class Alien_liike_2 : MonoBehaviour
                 Destroy(this.gameObject);
                 //Debug.Log("collision");
 
+                explosion.GetComponent<AudioSource>().Play();
+
                 GameObject apupaukku = Instantiate (this.paukku, this.GetComponent<Transform>().position, Quaternion.identity);
                 Destroy(apupaukku.gameObject, 1f );
+
+                
 
 
                 alienDeaths += 1;
                 if (alienDeaths == 32)
                 {
-                    addAlienSpeed += 0.2f;
+                    addAlienSpeed += 0.1f;
                     if (addAlienSpeed >= 2)
                     {
                         addAlienSpeed = 2;

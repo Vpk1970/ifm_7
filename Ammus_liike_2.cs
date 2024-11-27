@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ammus_liike_2 : MonoBehaviour
 {
     [SerializeField]
-    private float nopeus = 100f;
+    private float nopeus = 60f;
     private float yläraja = 4f;
 
     // Start is called before the first frame update
@@ -34,11 +34,11 @@ public class Ammus_liike_2 : MonoBehaviour
     {
         if (collision.name.Equals("Alien"))
         {
+            Destroy(this.gameObject);
 
             GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 10;
             //GameObject.Find("Koodia").GetComponent<score_lives>().pisteet += 10;
             
-            Destroy(this.gameObject);
 
         }
     }

@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
+//using Unity.VisualScripting.ReorderableList.Element_Adder_Menu;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,12 +19,23 @@ public class Aluksenliikkuminen : MonoBehaviour
 
     public GameObject paukku_2 = null;
 
-    
+    public GameObject explosion_2 = null;
+
+
+    /*private void Awake()
+    {
+        this.lives_teksti = GameObject.Find("lives_teksti");
+        this.lives_teksti.GetComponent<Text>().text = "LIVES " + elamat;
+    }*/
+
+
     // Start is called before the first frame update
     void Start()
     {
         this.lives_teksti = GameObject.Find("lives_teksti");
-        this.lives_teksti.GetComponent<Text>().text = "ELÄMÄT: " + elamat;
+        this.lives_teksti.GetComponent<Text>().text = "LIVES " + elamat;
+
+        explosion_2 = GameObject.Find("Explosion_2");
 
     }
 
@@ -54,17 +65,21 @@ public class Aluksenliikkuminen : MonoBehaviour
         }
 
 
-        lives_teksti.GetComponent<Text>().text = "ELÄMÄT: " + elamat.ToString("0");
+        lives_teksti.GetComponent<Text>().text = "LIVES " + elamat.ToString("0");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
         if (collision.name.Equals("Ammus_4(Clone)"))
         {
+
+
             this.pelaajanAlus.SetActive(false);//Destroy(this.gameObject);
             this.elamat -= 1;
             //Debug.Log(elamat);
-            this.lives_teksti.GetComponent<Text>().text = "ELÄMÄT: " + elamat;
+            this.lives_teksti.GetComponent<Text>().text = "LIVES " + elamat;
+
+            explosion_2.GetComponent<AudioSource>().Play();
 
             GameObject apupaukku_2 = Instantiate(this.paukku_2, this.GetComponent<Transform>().position, Quaternion.identity);
             Destroy(apupaukku_2.gameObject, 1f);

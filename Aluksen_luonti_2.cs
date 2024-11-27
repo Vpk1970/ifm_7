@@ -12,6 +12,7 @@ public class Aluksen_luonti_2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Screen.SetResolution(1024, 768, false);
         //aika = gameObject.AddComponent<Ajastin>();// Ajastin luokka on koodia gameobject issa
         //aika.aseta_aika(3f);// sekunnit       
         Invoke("luo_alus", 1.0f);
