@@ -5,7 +5,7 @@ using UnityEngine;
 public class AlienLuontiTehdas_2 : MonoBehaviour
 {
     public GameObject alien;
-    public float offset = 1.5f; // alienien väli joka suunnassa
+    private float offset = 1.2f; // alienien väli joka suunnassa
 
     //private float aikaajaljella = 10;
 

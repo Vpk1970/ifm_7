@@ -19,7 +19,7 @@ public class Pisteet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        score_teksti.GetComponent<Text>().text = "ELÄMÄT: " + pisteet.ToString("0");
+        score_teksti.GetComponent<Text>().text = "SCORE " + pisteet.ToString("0");
 
     }
 }
