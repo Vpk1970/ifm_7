@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ammus_liike_2 : MonoBehaviour
 {
     [SerializeField]
-    private float nopeus = 60f;
-    private float yläraja = 4f;
+    private float nopeus = 35f;
+    private float ylaraja = 6f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +24,7 @@ public class Ammus_liike_2 : MonoBehaviour
 
         //this.Ammus_6.GetComponent<Rigidbody2D>().AddForce(Vector2.up * nopeus);
         
-        if (this.GetComponent<Transform>().position.y > yläraja)
+        if (this.GetComponent<Transform>().position.y > ylaraja)
         {
             Destroy(this.gameObject);
 
@@ -41,5 +42,12 @@ public class Ammus_liike_2 : MonoBehaviour
             
 
         }
+        if (collision.name.Equals("Malien"))
+        {
+            //Debug.Log("Tï¿½rmï¿½ys");
+            GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 350;
+
+        }
     }
+    
 }

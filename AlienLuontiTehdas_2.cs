@@ -7,11 +7,16 @@ public class AlienLuontiTehdas_2 : MonoBehaviour
     public GameObject alien;
     private float offset = 1.2f; // alienien väli joka suunnassa
 
+    //public GameObject bitsound_2 = null;
+
     //private float aikaajaljella = 10;
 
     // Start is called before the first frame update
     void Start()
     {
+        //bitsound_2 = GameObject.Find("bittisoundi_2");
+        //bitsound_2.GetComponent<AudioSource>().Play();
+
         /*for (float y = 1f; y <= 4f; y = y + 1f)
         {
             for (float x = 1f; x <= 8f; x = x + 1f)

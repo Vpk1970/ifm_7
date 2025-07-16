@@ -5,10 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class Intro : MonoBehaviour
 {
+
+    public GameObject bitsound = null;
+
     // Start is called before the first frame update
     void Start()
     {
         //Screen.SetResolution(800, 600, false);
+
+        bitsound = GameObject.Find("bittisoundi");
+        bitsound.GetComponent<AudioSource>().Play();
 
     }
 
