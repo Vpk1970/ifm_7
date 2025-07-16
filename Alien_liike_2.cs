@@ -3,22 +3,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using System.Diagnostics;
+
 using Unity.VisualScripting;
-//using System;
+
 using System.Xml.Schema;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
-//using System;
-//using Debug = System.Diagnostics.Debug;
-//
-//
 
 
 public class Alien_liike_2 : MonoBehaviour
 {
-    private float alku_x; // Alienin alkupiste
-    private float loppu_x; // Alienin loppupiste
+    private float alku_x; // Alienin alkupiste x
+    private float loppu_x; // Alienin loppupiste x
 
     private int suunta; // Alienin liikkumissuunta -1 tai 1
     private float x_matka; // Alienin kulkema matka
@@ -29,14 +25,10 @@ public class Alien_liike_2 : MonoBehaviour
     private Vector3 origAlienPos; // Alienien alkupiste
     private Vector3 origAlienPosMax; // Alienien loppupiste
 
+    
     private float alien_up_to_down_offset; // Alienien liikkuminen pystysuunnassa
 
     private float y_alienAlareuna; // Alin piste
-
-    //public GameObject alien;
-
-    //public GameObject alienAmmus;
-    //private GameObject apuluonti;
 
     private AlienLuontiTehdas_2 alienlt;
 
@@ -52,8 +44,6 @@ public class Alien_liike_2 : MonoBehaviour
     public GameObject paukku = null;
 
     public GameObject explosion = null;
-
-
 
 
     private void Awake()
@@ -72,7 +62,7 @@ public class Alien_liike_2 : MonoBehaviour
 
         origAlienPos = this.GetComponent<Transform>().position;
         origAlienPosMax = new Vector3(this.GetComponent<Transform>().position.x + x_matka, this.GetComponent<Transform>().position.y, this.GetComponent<Transform>().position.z);
-
+        
         xMin = 0.2f * x_matka;
         xMax = 0.2f * x_matka;
 
@@ -83,11 +73,7 @@ public class Alien_liike_2 : MonoBehaviour
 
         _transform = this.GetComponent<Transform>();
 
-        //addAlienSpeed = 1f;
-
         explosion = GameObject.Find("Explosion");
-
-
 
     }
 
@@ -96,19 +82,6 @@ public class Alien_liike_2 : MonoBehaviour
     {
 
         AlienLiike();
-        //Debug.Log(this._transform.position.x);
-
-
-        //[Conditional(UNITY_ASSERTIONS)]
-        //Debug.Assert(alku_x == loppu_x);
-
-        // Jos alku_x on sama kuin loppu_x tulee ilmoitus konsoliin
-        //UnityEngine.Debug.Assert(suunnanVaihto == true);
-
-        //Debug.Log(addAlienSpeed);
-        //Debug.Log(this.transform.position.x);
-
-
 
 
     }
@@ -117,18 +90,12 @@ public class Alien_liike_2 : MonoBehaviour
     {
         if (collision.name.Equals("Ammus_5(Clone)"))
         {
-            //Destroy(this.Ammus_5);
-
             Destroy(this.gameObject);
-            //Debug.Log("collision");
 
             explosion.GetComponent<AudioSource>().Play();
 
             GameObject apupaukku = Instantiate(this.paukku, this.GetComponent<Transform>().position, Quaternion.identity);
             Destroy(apupaukku.gameObject, 1f);
-
-
-
 
             alienDeaths += 1;
             if (alienDeaths == 32)
@@ -151,36 +118,17 @@ public class Alien_liike_2 : MonoBehaviour
 
     public void AlienLiike()
     {
+        // vähennä y jos reunoissa
+        this._transform.position = Dec_Y_position(); 
 
-        this._transform.position = Dec_Y_position();
+        // Tarkistetaan onko alien lohkojen A ja C ulkopuolella.
+        suunnanVaihto = IsOutsideOfBlocks_A_and_C(alku_x, xMin, loppu_x, xMax); 
 
-        suunnanVaihto = IsOutsideOfBlocks_A_and_C(alku_x, xMin, loppu_x, xMax); // Tarkistetaan onko alien lohkojen A ja C ulkopuolella.
+        // Onko alien reunoissa jolloin k��nnet��n suunta.
+        IsAlienOnEdges(loppu_x, alku_x);
 
 
-
-        // Onko alien reunoissa jollain k��nnet��n suunta.
-
-        if (((this._transform.position.x >= loppu_x) && (suunnanVaihto)) || ((this._transform.position.x <= alku_x) && (suunnanVaihto))) // ???
-        {
-            suunta *= -1;
-            suunnanVaihto = false;
-
-            //Debug.Log(this._transform.position.x);
-
-            if (this.GetComponent<Transform>().position.y <= y_alienAlareuna)
-            {
-                //Application.Quit();
-                Destroy(this.gameObject);
-                PlayerPrefs.SetFloat("score", GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
-
-                //Debug.Log(GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
-
-                SceneManager.LoadScene(2);
-
-            }
-
-        }
-
+        // Change alien position
         this._transform.position += nopeus * addAlienSpeed * Time.deltaTime * new Vector3(1f * suunta, 0f, 0f);// localPosition ???        
 
     }
@@ -206,10 +154,8 @@ public class Alien_liike_2 : MonoBehaviour
     {
         if (this._transform.position.x <= alku_x)
         {
-            //this._transform.position = origAlienPos - new Vector3(0f, alien_up_to_down_offset += 0.1f, 0f);
-
-            //Debug.Log(this.transform.position.x);
             return origAlienPos - new Vector3(0f, alien_up_to_down_offset += 0.1f, 0f);
+
         }
         if (this._transform.position.x >= loppu_x)
         {
@@ -218,9 +164,28 @@ public class Alien_liike_2 : MonoBehaviour
         else
         {
             return this._transform.position;
+
         }
-            
+
     }
+
+    public void IsAlienOnEdges(float loppu_x, float alku_x)
+    {
+        if (((this._transform.position.x >= loppu_x) && (suunnanVaihto)) || ((this._transform.position.x <= alku_x) && (suunnanVaihto))) // ???
+        {
+            suunta *= -1;
+            suunnanVaihto = false;
+
+            if (this.GetComponent<Transform>().position.y <= y_alienAlareuna)
+            {
+                Destroy(this.gameObject);
+                PlayerPrefs.SetFloat("score", GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet);
+                SceneManager.LoadScene(2);
+
+            }
+
+        }
+     }
 }
 
 
