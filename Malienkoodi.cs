@@ -1,125 +1,120 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+
 
 public class Malienkoodi : MonoBehaviour
 {
     public GameObject mAlien = null;
     private float liikeNopeus = 5f;
     private float rand;
+    private bool luo_lippu;
     private bool liiku_lippu;
+    private bool mAlien_loppu_x;
 
-    public GameObject paukku = null;// Räjähdys animaatio
+    public GameObject paukku_2 = null;// Räjähdys animaatio
 
-    public GameObject explosion = null; // Räjähdys ääniefekti
-
-
-    //public GameObject paukku = null;
-
-    //public GameObject explosion_3 = null;
-
+    public GameObject explosion_2 = null; // Räjähdys ääniefekti
+    
     // Start is called before the first frame update
     void Start()
     {
-
         //this.gameObject.SetActive(true);
+        luo_lippu = false;
         liiku_lippu = false;
-        explosion = GameObject.Find("Explosion");
+        mAlien_loppu_x = true;
 
-        //explosion_3 = GameObject.Find("Explosion");
-        Invoke(nameof(luo_mAlien), 1f);
-        
-
-
+        //mAlien = GameObject.Find("mAlien"); ***
+                
+        //paukku_2 = GameObject.Find("Paukku_2");
+                
     }
 
     // Update is called once per frame
     void Update()
     {
-        liiku();
-        /*this.gameObject.SetActive(false);
-        if (true) //Random.Range(0, 5) <= 1
+
+        luo_mAlien();
+                        
+        if (liiku_lippu) 
         {
-            liiku_lippu = true;
-            //this.gameObject.SetActive(true);
-
-        }
-
-        if (liiku_lippu)
-        {
-            //luo_mAlien();
-            //Invoke(nameof(luo_mAlien), 5f);
-
-            //this.gameObject.SetActive(true);
             liiku();
-            //Invoke(nameof(liiku), Random.Range(10, 15));
-        }*/
-
+   
+        }
+                
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.name.Equals("Ammus_5(Clone)"))
         {
-            //Destroy(this.gameObject);
-            this.mAlien.SetActive(false);
-            //GameObject apupaukku = Instantiate(this.paukku, this.GetComponent<Transform>().position, Quaternion.identity);
-            //Destroy(apupaukku.gameObject, 1f);
+            Destroy(this.gameObject);
+            GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 100;
 
-            //this.gameObject.SetActive(false);
-            //Invoke("aktivoi", Random.Range(10, 15));
-
-            explosion.GetComponent<AudioSource>().Play();
-
-            Invoke(nameof(luo_mAlien), 5f);
-            //luo_mAlien();
+            GameObject.Find("Explosion_2").GetComponent<AudioSource>().Play();
+            
+            //mAlien.SetActive(false); ***
+            
+            //GameObject apupaukku_2 = Instantiate(paukku_2, this.GetComponent<Transform>().position, Quaternion.identity);
+            //Destroy(apupaukku_2, 1f);
 
 
-
-            //explosion_3.GetComponent<AudioSource>().Play();
-
-
-
-
-
-            //GameObject apupaukku = Instantiate(this.paukku, this.GetComponent<Transform>().position, Quaternion.identity);
-            //Destroy(apupaukku.gameObject, 1f);
-
+                        
         }
     }
-    /*public void aktivoi()
-    {
-        this.gameObject.transform.position = new Vector3(-13f, 4.5f, 0f);
-
-        Debug.Log("T�rm�ys");
-
-        this.gameObject.SetActive(true);
-
-    }*/
+    
 
     public void liiku()
     {
-
-        //Debug.Log("True");
-        this.GetComponent<Transform>().Translate(liikeNopeus * Time.deltaTime, 0f, 0f); ;
-
-        //for (int i = 0; i < 360; i++)
-        //{
-        //    this.transform.Rotate(0, 0, i, Space.Self);
-        //}
-        if (this.GetComponent<Transform>().position.x >= 13f)
+        
+        if (mAlien != null)
         {
-            //this.gameObject.SetActive(true);
-            this.gameObject.transform.position = new Vector3(-13f, 4.5f, 0f);
-            liiku_lippu = false;
+            this.GetComponent<Transform>().Translate(liikeNopeus * Time.deltaTime, 0f, 0f);
 
+
+            if (this.GetComponent<Transform>().position.x >= 13f)
+            {
+                Destroy(this.gameObject);
+
+
+                //this.gameObject.SetActive(true);
+                //mAlien.gameObject.transform.position = new Vector3(-10f, 4.5f, 0f); ***
+                //luo_lippu = false;
+                mAlien_loppu_x = true;
+                liiku_lippu = false;
+                //Destroy(mAlien);
+                //mAlien.SetActive(false); ***
+
+            }
         }
+
+
+
     }
     public void luo_mAlien()
     {
-        this.gameObject.transform.position = new Vector3(-13f, 4.5f, 0f);
-        this.mAlien.SetActive(true);
-        //GameObject apu_mAlien = Instantiate(this.mAlien, new Vector3(-13f, 4.5f, 0f), Quaternion.identity);
-        //elossa = 0;
+        System.Random rand = new();
+
+        if (rand.Next(0, 2000) <= 1)
+        {
+            luo_lippu = true;
+
+        }
+
+        if (luo_lippu && mAlien_loppu_x)
+        {
+            mAlien_loppu_x = false;
+            luo_lippu = false;
+            liiku_lippu = true;
+            
+            //mAlien.SetActive(true); ***
+            //this.transform.position = new Vector3(-10f, 4.5f, 0f);      
+
+            Instantiate(this.mAlien, new Vector3(-13f, 4.5f, 0f), Quaternion.identity);
+
+
+        }
+        
     }
 
 }

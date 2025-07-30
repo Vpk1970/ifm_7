@@ -80,9 +80,7 @@ public class Alien_liike_2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         AlienLiike();
-
 
     }
 
@@ -112,7 +110,7 @@ public class Alien_liike_2 : MonoBehaviour
                 alienlt.Invoke(nameof(AlienLuontiTehdas_2.AlienLuonti_2), 3.0f);
 
             }
-            GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 10;
+            //GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 10;
         }
     }
 
@@ -128,7 +126,7 @@ public class Alien_liike_2 : MonoBehaviour
         IsAlienOnEdges(loppu_x, alku_x);
 
 
-        // Change alien position
+        // Change alien position...liikuta alienit
         this._transform.position += nopeus * addAlienSpeed * Time.deltaTime * new Vector3(1f * suunta, 0f, 0f);// localPosition ???        
 
     }

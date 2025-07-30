@@ -4,9 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - mAlien: {fileID: 8351331777582370286, guid: 00aa0076c328e3e428a5363d3229987e, type: 3}
-  - paukku: {fileID: 4692069675833713272, guid: 9d473556f2b3d5440a84bed9fc2c6215, type: 3}
-  - explosion: {fileID: 3431970824504910956, guid: dc18f6719c437e64b82c3bd5c5a628ff, type: 3}
+  - mAlien: {fileID: 8059493721304276616, guid: 00aa0076c328e3e428a5363d3229987e, type: 3}
+  - paukku_2: {fileID: 5679043600785392565, guid: 15023037366df3547b111f067225c3a6, type: 3}
+  - explosion_2: {fileID: 1481039884905224001, guid: 225d8d34627319d4aad78da863b665c9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

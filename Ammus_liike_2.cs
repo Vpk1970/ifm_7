@@ -42,7 +42,7 @@ public class Ammus_liike_2 : MonoBehaviour
             
 
         }
-        if (collision.name.Equals("Malien"))
+        if (collision.name.Equals("mAlien"))
         {
             //Debug.Log("T�rm�ys");
             GameObject.Find("Koodia").GetComponent<Pisteet>().pisteet += 350;
